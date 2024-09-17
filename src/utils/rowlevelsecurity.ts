@@ -51,7 +51,7 @@ export const createRowlevelSecurity = async (
     const response = await postRequest(
       headers,
       `/rowlevelsecurity/`,
-      JSON.stringify(rowlevelsecurity),
+      rowlevelsecurity,
     );
     return response;
   } catch (error) {

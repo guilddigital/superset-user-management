@@ -67,8 +67,12 @@ export const bulkUserUploadUg = async (
         level.name === rowLevelSecurity.name,
     );
     if (!doesRowLevelExist) {
-      // const response = await createRowlevelSecurity(rowLevelSecurity, headers);
-      // rowLevelFromSuperset.push(response);
+      console.log({ ...rowLevelSecurity, description: '' });
+      const response = await createRowlevelSecurity(
+        { ...rowLevelSecurity, description: '' },
+        headers,
+      );
+      rowLevelFromSuperset.push(response);
     }
   }
 };

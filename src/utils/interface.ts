@@ -23,6 +23,7 @@ export interface IUserRowLevelSecurity {
 
 export interface IRowLevelSecurity {
   clause: string;
+  description: string;
   filter_type: string;
   group_key: string;
   name: string;
