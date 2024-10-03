@@ -48,11 +48,11 @@ export const bulkUserUploadUg = async (
       });
     }
 
-    const rolePermissions = generatePermissions(userPermissions);
-    await addPermissionsForUserRole(userRole.id, rolePermissions, headers);
+    // const rolePermissions = generatePermissions(userPermissions);
+    // await addPermissionsForUserRole(userRole.id, rolePermissions, headers);
 
-    const generatedUser = generateUser(user, [userRole.id]);
-    await createUserAccount(generatedUser, headers);
+    // const generatedUser = generateUser(user, [userRole.id]);
+    // await createUserAccount(generatedUser, headers);
 
     const rowLevelSecurity = generateRowLevelSecurity(
       [userRole.id],
@@ -63,23 +63,16 @@ export const bulkUserUploadUg = async (
       user?.zone,
     );
     const doesRowLevelExist = rowLevelFromSuperset.some(
-      (level: IRowLevelSecurityFromSuperset) =>
-        level.name === rowLevelSecurity.name,
+      (level: any) => level.result.name === rowLevelSecurity.name,
     );
+    console.log(rowLevelFromSuperset);
     if (!doesRowLevelExist) {
-      console.log({ ...rowLevelSecurity, description: '' });
-      console.log({
-        ...headers,
-        Cookie:
-          'session=.eJyVjkFOxDAMRe-SNVJtJ02cXgWhykkcOqKajprMAiHuTga2SIjlt9-z_4dZ66ltM0s_7_pk1ksxi4kwo40soWbvEoRAyhKpUCyzV-9QcyIQKJq8kEXGxLkoCoQcRBEqekuQfKUIxcPQyGmS4FIZ2thikcgusPPO88yUIAZxBSJXm6IZRe5Nz582OGJuZ1378abXMVDJ2Sdnq3KYBZiyrzbU4rFiwJnAkXDGNLz9yLLrw7mOdJNXXbdL68f5bpZns_V-W6bpG9qO1hcG5unxuU37wKbh_M6cx65_Mf-98_L5BXy4eXg.ZuqH4g.8QRgTwPU3faOmmOVP7JOIvNayW0',
-      });
+      console.log('==================');
+      console.log(rowLevelSecurity.name);
+      console.log('==================');
       const response = await createRowlevelSecurity(
         { ...rowLevelSecurity, description: '' },
-        {
-          ...headers,
-          Cookie:
-            'session=.eJyVjkFOxDAMRe-SNVJtJ02cXgWhykkcOqKajprMAiHuTga2SIjlt9-z_4dZ66ltM0s_7_pk1ksxi4kwo40soWbvEoRAyhKpUCyzV-9QcyIQKJq8kEXGxLkoCoQcRBEqekuQfKUIxcPQyGmS4FIZ2thikcgusPPO88yUIAZxBSJXm6IZRe5Nz582OGJuZ1378abXMVDJ2Sdnq3KYBZiyrzbU4rFiwJnAkXDGNLz9yLLrw7mOdJNXXbdL68f5bpZns_V-W6bpG9qO1hcG5unxuU37wKbh_M6cx65_Mf-98_L5BXy4eXg.ZuqH4g.8QRgTwPU3faOmmOVP7JOIvNayW0',
-        },
+        { ...headers },
       );
       rowLevelFromSuperset.push(response);
     }

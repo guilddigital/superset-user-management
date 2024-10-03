@@ -16,15 +16,17 @@ export const generateRowLevelSecurity = (
   if (zone !== null) {
     return {
       clause: `${groupKey}='${placeCode}' AND zone = '${zone}'`,
+      description: '',
       filter_type: `Regular`,
       group_key: groupKey,
-      name: `${userType}-${placeCode}`,
+      name: `${userType}-${placeCode}_zone-${zone}`,
       roles: roles,
       tables: JSON.parse(tables),
     };
   } else {
     return {
       clause: `${groupKey}='${placeCode}'`,
+      description: '',
       filter_type: `Regular`,
       group_key: groupKey,
       name: `${userType}-${placeCode}`,
@@ -53,6 +55,7 @@ export const createRowlevelSecurity = async (
       `/rowlevelsecurity/`,
       rowlevelsecurity,
     );
+
     return response;
   } catch (error) {
     console.error('Error creating user rowlevel security:', error);
