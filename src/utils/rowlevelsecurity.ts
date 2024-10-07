@@ -13,9 +13,29 @@ export const generateRowLevelSecurity = (
   userType: string,
   zone?: string,
 ) => {
-  if (zone !== null) {
+  // if (zone !== null) {
+  //   return {
+  //     clause: `${groupKey}='${placeCode}' AND zone = '${zone}'`,
+  //     description: '',
+  //     filter_type: `Regular`,
+  //     group_key: groupKey,
+  //     name: `${userType}-${placeCode}_zone-${zone}`,
+  //     roles: roles,
+  //     tables: JSON.parse(tables),
+  //   };
+  // }
+  if (zone !== null && typeof zone === 'string') {
+    // Check if zone contains multiple strings
+    const zoneArray = zone.includes(',') ? zone.split(',') : [zone];
+
+    // Format the zone clause based on the number of strings
+    const zoneClause =
+      zoneArray.length > 1
+        ? `zone IN ('${zoneArray.join("','")}')` // Handles multiple zones like 'A','B','C'
+        : `zone = '${zone}'`; // Handles a single zone
+
     return {
-      clause: `${groupKey}='${placeCode}' AND zone = '${zone}'`,
+      clause: `${groupKey}='${placeCode}' AND ${zoneClause}`,
       description: '',
       filter_type: `Regular`,
       group_key: groupKey,
