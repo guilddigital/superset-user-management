@@ -11,10 +11,20 @@ export interface SupersetRole {
   name: string;
 }
 
-export const generateRole = (userType: string, placeCode: string) => {
-  return {
-    name: `${userType}_${placeCode}`,
-  };
+export const generateRole = (
+  userType: string,
+  placeCode: string,
+  zone: string,
+) => {
+  if (zone !== null) {
+    return {
+      name: `${userType}_zone_${zone}_${placeCode}`,
+    };
+  } else {
+    return {
+      name: `${userType}_${placeCode}`,
+    };
+  }
 };
 
 export const generatePermissions = (permissions: any) => ({
