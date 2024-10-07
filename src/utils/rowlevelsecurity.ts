@@ -13,25 +13,14 @@ export const generateRowLevelSecurity = (
   userType: string,
   zone?: string,
 ) => {
-  if (zone !== null) {
-    return {
-      clause: `${groupKey}='${placeCode}' AND zone = '${zone}'`,
-      filter_type: `Regular`,
-      group_key: groupKey,
-      name: `${userType}-${placeCode}`,
-      roles: roles,
-      tables: JSON.parse(tables),
-    };
-  } else {
-    return {
-      clause: `${groupKey}='${placeCode}'`,
-      filter_type: `Regular`,
-      group_key: groupKey,
-      name: `${userType}-${placeCode}`,
-      roles: roles,
-      tables: JSON.parse(tables),
-    };
-  }
+  return {
+    clause: `${groupKey}='${placeCode}'`,
+    filter_type: `Regular`,
+    group_key: groupKey,
+    name: `${userType}-${placeCode}`,
+    roles: roles,
+    tables: tables,
+  };
 };
 
 export const getAvailableRowlevelSecurityFromSuperset = async (
@@ -53,6 +42,7 @@ export const createRowlevelSecurity = async (
       `/rowlevelsecurity/`,
       rowlevelsecurity,
     );
+    console.log(response);
     return response;
   } catch (error) {
     console.error('Error creating user rowlevel security:', error);

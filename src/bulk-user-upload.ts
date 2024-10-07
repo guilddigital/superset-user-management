@@ -31,7 +31,7 @@ export const bulkUserUploadUg = async (
   for (const user of users) {
     let userRole: SupersetRole;
 
-    const generatedRole = generateRole(user.role, user.place, user?.zone);
+    const generatedRole = generateRole(user.role, user.place);
 
     const existingRoleOnSuperset = rolesAvailableOnSuperset.find(
       (ssrole: { id: number; name: string }) =>
