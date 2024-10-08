@@ -62,7 +62,8 @@ export const getAvailableRowlevelSecurityFromSuperset = async (
   const method = 'GET';
   const endpoint = `/rowlevelsecurity/`;
   const request = initRequest(method, authorizationHeaders);
-  return await fetchRequest(endpoint, request);
+  const response = await fetchRequest(endpoint, request);
+  return response;
 };
 
 export const createRowlevelSecurity = async (
