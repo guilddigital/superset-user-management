@@ -48,11 +48,11 @@ export const bulkUserUploadUg = async (
       });
     }
 
-    // const rolePermissions = generatePermissions(userPermissions);
-    // await addPermissionsForUserRole(userRole.id, rolePermissions, headers);
+    const rolePermissions = generatePermissions(userPermissions);
+    await addPermissionsForUserRole(userRole.id, rolePermissions, headers);
 
-    // const generatedUser = generateUser(user, [userRole.id]);
-    // await createUserAccount(generatedUser, headers);
+    const generatedUser = generateUser(user, [userRole.id]);
+    await createUserAccount(generatedUser, headers);
 
     const rowLevelSecurity = generateRowLevelSecurity(
       [userRole.id],
