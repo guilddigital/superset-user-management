@@ -62,16 +62,11 @@ export const bulkUserUploadUg = async (
       user.role,
       user?.zone,
     );
-    console.log('rowLevelSecurity===============');
-    console.log(rowLevelSecurity);
-    console.log('===============');
-    console.log('rowLevelFromSuperset===============');
-    console.log(rowLevelFromSuperset);
-    console.log('===============');
+
     const doesRowLevelExist = rowLevelFromSuperset.some(
       (level: any) => level.name || level.result.name === rowLevelSecurity.name,
     );
-    console.log(rowLevelFromSuperset);
+
     if (!doesRowLevelExist) {
       console.log('==================');
       console.log(rowLevelSecurity.name);
