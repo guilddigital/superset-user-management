@@ -16,7 +16,7 @@ export const generateRole = (
   placeCode: string,
   zone: string,
 ) => {
-  if (zone !== null) {
+  if (zone) {
     return {
       name: `${userType}_zone_${zone}_${placeCode}`,
     };

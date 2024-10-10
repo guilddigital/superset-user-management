@@ -49,10 +49,10 @@ export const bulkUserUploadUg = async (
     }
 
     const rolePermissions = generatePermissions(userPermissions);
-    console.log('================');
-    console.log(userPermissions);
-    console.log(rolePermissions);
-    console.log('================');
+    // console.log('================');
+    // console.log(userPermissions);
+    // console.log(rolePermissions);
+    // console.log('================');
     await addPermissionsForUserRole(userRole.id, rolePermissions, headers);
 
     const generatedUser = generateUser(user, [userRole.id]);
