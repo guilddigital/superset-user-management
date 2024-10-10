@@ -13,7 +13,7 @@ export const generateRowLevelSecurity = (
   userType: string,
   zone?: string,
 ) => {
-  if (zone !== null) {
+  if (zone) {
     return {
       clause: `${groupKey}='${placeCode}' AND zone = '${zone}'`,
       description: '',

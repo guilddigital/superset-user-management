@@ -31,7 +31,7 @@ export const bulkUserUploadUg = async (
   for (const user of users) {
     let userRole: SupersetRole;
     // pass zone as null if not applicable
-    const generatedRole = generateRole(user.role, user.place, user?.zone);
+    const generatedRole = generateRole(user.role, user.place);
 
     const existingRoleOnSuperset = rolesAvailableOnSuperset.find(
       (ssrole: { id: number; name: string }) =>
@@ -48,11 +48,15 @@ export const bulkUserUploadUg = async (
       });
     }
 
-    // const rolePermissions = generatePermissions(userPermissions);
-    // await addPermissionsForUserRole(userRole.id, rolePermissions, headers);
+    const rolePermissions = generatePermissions(userPermissions);
+    console.log('================');
+    console.log(userPermissions);
+    console.log(rolePermissions);
+    console.log('================');
+    await addPermissionsForUserRole(userRole.id, rolePermissions, headers);
 
-    // const generatedUser = generateUser(user, [userRole.id]);
-    // await createUserAccount(generatedUser, headers);
+    const generatedUser = generateUser(user, [userRole.id]);
+    await createUserAccount(generatedUser, headers);
 
     const rowLevelSecurity = generateRowLevelSecurity(
       [userRole.id],
@@ -60,12 +64,14 @@ export const bulkUserUploadUg = async (
       user.place,
       CHA_TABLES,
       user.role,
-      user?.zone,
-    );
-    const doesRowLevelExist = rowLevelFromSuperset.some(
-      (level: any) => level.result.name === rowLevelSecurity.name,
     );
     console.log(rowLevelFromSuperset);
+    console.log(rowLevelSecurity.name);
+    const doesRowLevelExist = rowLevelFromSuperset.some(
+      (level: any) => level?.name === rowLevelSecurity.name,
+    );
+    console.log(doesRowLevelExist);
+
     if (!doesRowLevelExist) {
       console.log('==================');
       console.log(rowLevelSecurity.name);
