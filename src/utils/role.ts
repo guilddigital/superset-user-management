@@ -14,7 +14,7 @@ export interface SupersetRole {
 export const generateRole = (
   userType: string,
   placeCode: string,
-  zone: string,
+  zone?: string,
 ) => {
   if (zone) {
     return {

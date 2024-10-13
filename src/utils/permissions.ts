@@ -1,4 +1,4 @@
-import { DASHBOARD_VIEWER } from './const';
+import { DASHBOARD_VIEWER, PROJECT_MANAGER } from './const';
 import { IHeaders } from './interface';
 import { SupersetRole } from './role';
 import { getPermissionsByRoleID, postRequest } from './superset';
@@ -8,7 +8,7 @@ export const getUserPermissions = async (
   headers: IHeaders,
 ) => {
   const dasboardViewerRole = availableSupersetRoles.find(
-    (ssrole: { id: number; name: string }) => ssrole.name === DASHBOARD_VIEWER,
+    (ssrole: { id: number; name: string }) => ssrole.name === PROJECT_MANAGER,
   );
 
   if (!dasboardViewerRole) {
@@ -30,7 +30,7 @@ export const getUserPermissions = async (
   );
 
   const chaTables = JSON.parse(process.env.CHA_TABLES || '[]');
-  return [...dashboardViewerPermissionIds, ...chaTables];
+  return [...dashboardViewerPermissionIds];
 
   //add zone permission
 };
