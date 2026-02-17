@@ -30,7 +30,7 @@ export const getUserPermissions = async (
   );
 
   const chaTables = JSON.parse(process.env.CHA_TABLES || '[]');
-  return [...dashboardViewerPermissionIds, ...chaTables];
+  return [...dashboardViewerPermissionIds];
 
   //add zone permission
 };

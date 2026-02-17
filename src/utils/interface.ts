@@ -23,6 +23,7 @@ export interface IUserRowLevelSecurity {
 
 export interface IRowLevelSecurity {
   clause: string;
+  description: string;
   filter_type: string;
   group_key: string;
   name: string;
@@ -50,6 +51,33 @@ export interface IRowLevelSecurityFromSuperset {
       table_name: 'string';
     },
   ];
+}
+
+//new interface
+export interface IRowLevelSecurityFromSuperset2 {
+  id: string;
+  result: {
+    changed_on_delta_humanized: 'string';
+    clause: 'string';
+    description: 'string';
+    filter_type: 'Regular';
+    group_key: 'string';
+    id: 0;
+    name: 'string';
+    roles: [
+      {
+        id: 0;
+        name: 'string';
+      },
+    ];
+    tables: [
+      {
+        id: 0;
+        schema: 'string';
+        table_name: 'string';
+      },
+    ];
+  };
 }
 export interface IHeaders {
   Authorization: string;
